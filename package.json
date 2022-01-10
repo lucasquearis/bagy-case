@@ -1,5 +1,5 @@
 {
-  "name": "case-bagy",
+  "name": "part-3",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,22 +7,16 @@
     "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lucasquearis/bagy-case.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lucasquearis/bagy-case/issues"
-  },
-  "homepage": "https://github.com/lucasquearis/bagy-case#readme",
-  "dependencies": {
-    "apollo-server": "^3.6.1",
-    "graphql": "^16.2.0"
-  },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "apollo-server": "^2.11.0",
+    "eslint-plugin-graphql": "^4.0.0",
+    "graphql": "^14.6.0",
+    "graphql-tools": "^6.0.8"
   }
 }

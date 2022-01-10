@@ -1,0 +1,13 @@
+type Cliente {
+  id: ID,
+  nomeCompleto: String,
+  email: String,
+  cpf: String,
+  dataNascimento: String,
+  endereco: String,
+}
+
+type Query {
+  cliente(id: ID): Cliente,
+  clientes: [Cliente],
+}

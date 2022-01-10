@@ -1,0 +1,13 @@
+type Pedido {
+  id: ID,
+  produtos: [Produto],
+  dataCompra: String,
+  parcelas: Int,
+  comprador: Cliente,
+  status: String,
+}
+
+type Query {
+  pedido: Pedido,
+  pedidos: [Pedido],
+}
