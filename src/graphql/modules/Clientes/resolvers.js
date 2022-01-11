@@ -1,4 +1,4 @@
-const clientes = require('../../../mock/clientes');
+let clientes = require('../../../mock/clientes');
 
 const geradorId = (lista) => {
   let novoId;
@@ -33,6 +33,7 @@ module.exports = {
       clientes.push(novoCliente);
       return novoCliente;
     },
+
     atualizaCliente(_, {id, data}) {
       const cliente = clientes.find(u => u.id === id);
       const indice = clientes.findIndex(u => u.id === id);
@@ -45,8 +46,22 @@ module.exports = {
       clientes.splice(indice, 1, novoCliente);
 
       return novoCliente;
+    },
+
+    deletaCliente(_, { filtro: { id, cpf } }) {
+      const condicao = id ? { id } : { cpf }
+      return deletarCliente(condicao)
     }
   }
 };
 
-console.log(geradorId(clientes));
+const deletarCliente = (filtro) => {
+  const [chave] = Object.keys(filtro);
+  const [valor] = Object.values(filtro);
+
+  const clienteEncontrado = clientes.find(cliente => cliente[chave] === valor);
+  const clientesFiltrados = clientes.filter(cliente => cliente[chave] !== valor)
+  clientes = clientesFiltrados;
+
+  return !!clienteEncontrado
+}

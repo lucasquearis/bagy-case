@@ -15,6 +15,11 @@ input ClienteInput {
   endereco: String,
 }
 
+input FiltroInput {
+  id: ID,
+  cpf: String,
+}
+
 type Query {
   cliente(id: ID): Cliente,
 
@@ -25,4 +30,6 @@ type Mutation {
   criarCliente(data: ClienteInput): Cliente!,
 
   atualizaCliente(id: ID!, data: ClienteInput): Cliente!,
+
+  deletaCliente(filtro: FiltroInput!): Boolean,
 }
