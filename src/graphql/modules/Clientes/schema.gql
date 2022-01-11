@@ -20,7 +20,7 @@ input FiltroInput {
 }
 
 type Query {
-  cliente(id: ID): Cliente,
+  cliente(id: ID!): Cliente,
 
   clientes: [Cliente],
 }

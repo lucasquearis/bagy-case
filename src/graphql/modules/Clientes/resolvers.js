@@ -1,34 +1,16 @@
-let clientes = require('../../../mock/clientes');
-
+const clientesService = require('../../../services/ClientesCadastroService');
 const db = require('../../../db');
 
 module.exports = {
   Query: {
-    cliente: (_, args) => clientes.find((cliente) => cliente.id === args.id),
-    clientes: async () =>  await db("clientes") ,
+    cliente: async (_, { id }) => clientesService.cliente(id),
+    clientes: async () => clientesService.clientes(),
   },
   Mutation: {
-    criaCliente: async (_, { data }) => {
-      const [response] = await db("clientes").insert(data);
-      return response;
-    },
+    criaCliente: async (_, { data }) => clientesService.criaCliente(data),
 
-    atualizaCliente: async (_, { id, data }) => {
-      const [response] = await db('clientes').where({ id }).update(data);
-      return response;
-    },
+    atualizaCliente: async (_, { id, data }) => clientesService.atualizaCliente(id, data),
 
-    deletaCliente: async(_, { filtro: { id, cpf, email } }) => {
-      if (id) {
-        return await db("clientes").where({id}).delete();
-      }
-      if (cpf) {
-        return await db("clientes").where({cpf}).delete();
-      }
-      if (email) {
-        return await db("clientes").where({email}).delete();
-      }
-      throw new Error('Favor passar um parametro sendo eles, id, cpf ou email!')
-    }
+    deletaCliente: async(_, { filtro }) => clientesService.deletaCliente(filtro),
   }
 };
