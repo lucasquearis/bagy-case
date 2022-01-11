@@ -1,11 +1,14 @@
 
+// https://medium.com/@MajikMan/starting-a-node-project-from-scratch-with-sqlite3-knex-and-express-fb4b765aca
+
 exports.up = function(knex) {
   return knex.schema.createTable('clientes', table => {
     table.increments('id').primary();
-    table.string('nomeCompleto');
-    table.string('email').unique();
-    table.string('cpf').unique();
-    table.timestamps('dataNascimento');
+    table.text('nomeCompleto').notNullable();
+    table.text('email').unique().notNullable();
+    table.text('cpf').unique().notNullable();
+    table.text('dataNascimento').notNullable();
+    table.text('endereco').notNullable();
   })
 };
 

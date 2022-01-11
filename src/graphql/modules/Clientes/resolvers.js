@@ -1,37 +1,16 @@
 let clientes = require('../../../mock/clientes');
 
-const geradorId = (lista) => {
-  let novoId;
-  let ultimo = lista[lista.length - 1];
-  if (!ultimo) {
-    novoId = 0;
-  } else {
-    novoId = ultimo.id;
-  }
-  return ++novoId;
-};
+const db = require('../../../db');
 
 module.exports = {
   Query: {
     cliente: (_, args) => clientes.find((cliente) => cliente.id === args.id),
-    clientes: () => clientes,
+    clientes: async () =>  await db("clientes") ,
   },
   Mutation: {
-    criarCliente(_, {data}) {
-
-      const clienteExistente = clientes.some(cliente => cliente.email === data.email)
-
-      if(clienteExistente) {
-        throw new Error(`Cliente Existente: ${data.nomeCompleto}`)
-      }
-
-      const novoCliente = {
-        ...data,
-        id: geradorId(clientes),
-      }
-
-      clientes.push(novoCliente);
-      return novoCliente;
+    criarCliente: async (_, { data }) => {
+      const [response] = await db("clientes").insert(data).returning("*");
+      return response
     },
 
     atualizaCliente(_, {id, data}) {
