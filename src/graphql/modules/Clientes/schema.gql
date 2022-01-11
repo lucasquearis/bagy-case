@@ -7,7 +7,22 @@ type Cliente {
   endereco: String,
 }
 
+input ClienteInput {
+  nomeCompleto: String,
+  email: String,
+  cpf: String,
+  dataNascimento: String,
+  endereco: String,
+}
+
 type Query {
   cliente(id: ID): Cliente,
+
   clientes: [Cliente],
+}
+
+type Mutation {
+  criarCliente(data: ClienteInput): Cliente!,
+
+  atualizaCliente(id: ID!, data: ClienteInput): Cliente!,
 }
