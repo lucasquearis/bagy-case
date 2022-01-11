@@ -8,7 +8,6 @@ exports.up = function(knex) {
     table.text('email').unique().notNullable();
     table.text('cpf').unique().notNullable();
     table.text('dataNascimento').notNullable();
-    table.text('endereco').notNullable();
   })
 };
 

@@ -8,39 +8,27 @@ module.exports = {
     clientes: async () =>  await db("clientes") ,
   },
   Mutation: {
-    criarCliente: async (_, { data }) => {
-      const [response] = await db("clientes").insert(data).returning("*");
-      return response
+    criaCliente: async (_, { data }) => {
+      const [response] = await db("clientes").insert(data);
+      return response;
     },
 
-    atualizaCliente(_, {id, data}) {
-      const cliente = clientes.find(u => u.id === id);
-      const indice = clientes.findIndex(u => u.id === id);
+    atualizaCliente: async (_, { id, data }) => {
+      const [response] = await db('clientes').where({ id }).update(data);
+      return response;
+    },
 
-      const novoCliente = {
-        ...cliente,
-        ...data,
+    deletaCliente: async(_, { filtro: { id, cpf, email } }) => {
+      if (id) {
+        return await db("clientes").where({id}).delete();
       }
-
-      clientes.splice(indice, 1, novoCliente);
-
-      return novoCliente;
-    },
-
-    deletaCliente(_, { filtro: { id, cpf } }) {
-      const condicao = id ? { id } : { cpf }
-      return deletarCliente(condicao)
+      if (cpf) {
+        return await db("clientes").where({cpf}).delete();
+      }
+      if (email) {
+        return await db("clientes").where({email}).delete();
+      }
+      throw new Error('Favor passar um parametro sendo eles, id, cpf ou email!')
     }
   }
 };
-
-const deletarCliente = (filtro) => {
-  const [chave] = Object.keys(filtro);
-  const [valor] = Object.values(filtro);
-
-  const clienteEncontrado = clientes.find(cliente => cliente[chave] === valor);
-  const clientesFiltrados = clientes.filter(cliente => cliente[chave] !== valor)
-  clientes = clientesFiltrados;
-
-  return !!clienteEncontrado
-}
