@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -e js,gql",
-    "start": "node index.js"
+    "start": "node index.js",
+    "createDatabases": "knex migrate:latest",
+    "populateDatabases": "knex seed:run"
   },
   "keywords": [],
   "author": "",
