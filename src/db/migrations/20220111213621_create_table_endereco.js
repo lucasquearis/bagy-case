@@ -15,7 +15,7 @@ exports.up = function(knex) {
         table.text('estado').notNullable();
         table.text('pais').notNullable();
         table.text('cep').notNullable();
-        table.text('numero').notNullable();
+        table.integer('numero').notNullable();
       })
     }
     return;

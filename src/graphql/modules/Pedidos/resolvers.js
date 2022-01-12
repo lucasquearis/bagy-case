@@ -1,6 +1,16 @@
+const pedidoService = require('../../../services/PedidosCadastroService');
+
 module.exports = {
   Query: {
-    pedido: () => null,
-    pedidos: () => ['pedido1', 'pedido2'],
+    pedido: async(_, { id }) => pedidoService.pedido(id),
+    pedidos: async () => pedidoService.pedidos(),
+  },
+
+  Mutation: {
+    criaPedido: async (_, { data, produtos }) => pedidoService.criaPedido(data, produtos),
+
+    atualizaPedido: async (_, { id, data }) => pedidoService.atualizaPedido(id, data),
+
+    deletaPedido: async (_, { id }) => pedidoService.deletaPedido(id),
   },
 };

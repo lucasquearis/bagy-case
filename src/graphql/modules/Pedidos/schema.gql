@@ -1,13 +1,33 @@
 type Pedido {
   id: ID,
-  produtos: [Produto],
-  dataCompra: String,
+  produtos: Produto!,
+  dataVenda: String,
   parcelas: Int,
-  comprador: Cliente,
+  clienteId: ID,
   status: String,
 }
 
+input PedidoInput {
+  dataVenda: String,
+  parcelas: Int,
+  clienteId: ID,
+  status: String,
+}
+
+input ProdutosInput {
+  id: ID,
+  quantidade: Int
+}
+
 type Query {
-  pedido: Pedido,
+  pedido(id: ID!): Pedido,
   pedidos: [Pedido],
+}
+
+type Mutation {
+  criaPedido(data: PedidoInput!, produtos: ProdutosInput!): Pedido!,
+
+  atualizaPedido(id: ID!, data: PedidoInput): Pedido!,
+
+  deletaPedido(id: ID!): Boolean,
 }

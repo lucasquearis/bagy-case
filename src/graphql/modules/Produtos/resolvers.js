@@ -3,7 +3,7 @@ const produtosService = require('../../../services/ProdutosCadastroService');
 module.exports = {
   Query: {
     produto: async (_, { id }) => produtosService.produto(id),
-    produtos: async() => produtosService.produtos(),
+    produtos: async () => produtosService.produtos(),
   },
 
   Mutation: {
