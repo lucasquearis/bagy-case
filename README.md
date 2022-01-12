@@ -7,7 +7,9 @@ Nesse desafio tive que criar uma API GraphQL Node utilizando a linguagem JavaScr
 - [Iniciando a Aplicação](#initApp)
 - [Configuração Email](#initEmail)
 - [Acessando a API](#initApi)
-- [CRUD Clientes](#crudClient)
+- [CRUD's da API](#crud)
+  - [Clientes](#crudClient)
+  - [Endereços](#crudEndereco)
 
 # <a name="initApp"></a> Iniciando a Aplicação
 
@@ -66,6 +68,8 @@ Você ira ver uma página chamada Playground, uma IDE gráfica do GraphQL, feita
 
 <hr>
 
+## <a name="crud"></a> CRUD's da API
+
 # <a name="crudClient"></a> CRUD Clientes
 
 ## Criando Clientes
@@ -104,3 +108,9 @@ Nessa mutation a função <code>deletaCliente</code> precisa receber um objeto <
 - cpf: <code>String</code>
 
 ![deleta cliente](/imagens/deletaClienteExample.png)
+
+# <a name="crudEnderecos"></a> CRUD Endereços
+
+## Criando Endereços
+
+Nessa mutation a função <code>criaEndereco</code>
