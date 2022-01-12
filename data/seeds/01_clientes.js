@@ -1,9 +1,7 @@
 // https://www.4devs.com.br/gerador_de_pessoas
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
   return knex('clientes').del()
     .then(function () {
-      // Inserts seed entries
       return knex('clientes').insert([
         {
           nomeCompleto: 'Mario da Silva',
