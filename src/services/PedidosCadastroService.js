@@ -1,7 +1,13 @@
 const db = require('../db');
+const { enviaEmail } = require('../../emailServer');
+
+const produtosEmailInfo = [];
+
 
 const verificaQuantidadeProduto = async (id, quantidade) => {
   const response = await db('produtos').where({ id }).first();
+  const infoProduto = {produto: response.nome, quantidade, preco: (quantidade*response.preco)};
+  produtosEmailInfo.push(infoProduto);
   if(quantidade > response.quantidadeEstoque) {
     throw new Error('Número de produtos indisponíveis');
   }
@@ -17,12 +23,17 @@ const atualizaQuantidadeProduto = async (id, quantidade) => {
 };
 
 const criaPedidoBanco = async (data, listaProdutos) => {
+  const { clienteId } = data;
   const formatoBanco = {
     ...data,
     produtos: JSON.stringify(listaProdutos),
   };
 
   const [response] = await db('pedidos').insert(formatoBanco);
+  const { email } = await db('clientes').where({ id: clienteId }).first();
+  enviaEmail(email, produtosEmailInfo
+    .map(({ produto, quantidade, preco }) => `Produto: ${produto} - Quantidade: ${quantidade} - Preço Total: ${preco}`)
+    .join('\n'));
   return response;
 }
 
@@ -32,7 +43,6 @@ class PedidosCadastroService {
   pedidos = async () => await db('pedidos');
 
   criaPedido = async (data, listaProdutos) => {
-    console.log(listaProdutos);
 
     listaProdutos.forEach(({id, quantidade}) => verificaQuantidadeProduto(id, quantidade));
 

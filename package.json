@@ -17,10 +17,12 @@
   },
   "dependencies": {
     "apollo-server": "^2.11.0",
+    "dotenv": "^11.0.0",
     "eslint-plugin-graphql": "^4.0.0",
     "graphql": "^14.6.0",
     "graphql-tools": "^6.0.8",
     "knex": "^0.95.15",
+    "nodemailer": "^6.7.2",
     "sqlite3": "^5.0.2"
   }
 }

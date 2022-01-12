@@ -4,6 +4,12 @@ exports.seed = function(knex) {
     .then(function () {
       return knex('clientes').insert([
         {
+          nomeCompleto: 'Lucas Dev',
+          email: 'lucasquearis@hotmail.com',
+          cpf: '041.234.180-56',
+          dataNascimento: '20/02/1996'
+        },
+        {
           nomeCompleto: 'Mario da Silva',
           email: 'mariosilva@email.com',
           cpf: '040.234.180-56',
