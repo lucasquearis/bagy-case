@@ -1,6 +1,6 @@
 type Pedido {
   id: ID,
-  produtos: Produto!,
+  produtos: String!,
   dataVenda: String,
   parcelas: Int,
   clienteId: ID,
@@ -25,7 +25,7 @@ type Query {
 }
 
 type Mutation {
-  criaPedido(data: PedidoInput!, produtos: ProdutosInput!): Pedido!,
+  criaPedido(data: PedidoInput!, produtos: [ProdutosInput!]): Pedido!,
 
   atualizaPedido(id: ID!, data: PedidoInput): Pedido!,
 

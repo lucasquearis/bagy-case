@@ -5,9 +5,25 @@ const verificaQuantidadeProduto = async (id, quantidade) => {
   if(quantidade > response.quantidadeEstoque) {
     throw new Error('Número de produtos indisponíveis');
   }
+  return true;
+};
+
+const atualizaQuantidadeProduto = async (id, quantidade) => {
+  const response = await db('produtos').where({ id }).first();
+
   const atualizaQuantidade = response.quantidadeEstoque - quantidade;
 
   return db('produtos').where({ id }).update({ quantidadeEstoque: atualizaQuantidade });
+};
+
+const criaPedidoBanco = async (data, listaProdutos) => {
+  const formatoBanco = {
+    ...data,
+    produtos: JSON.stringify(listaProdutos),
+  };
+
+  const [response] = await db('pedidos').insert(formatoBanco);
+  return response;
 }
 
 class PedidosCadastroService {
@@ -15,17 +31,14 @@ class PedidosCadastroService {
 
   pedidos = async () => await db('pedidos');
 
-  criaPedido = async (data, produtos) => {
-    const { id, quantidade } = produtos;
-    console.log(data);
-    console.log(produtos);
-    verificaQuantidadeProduto(id, quantidade);
-    const novoFormatoBanco = {
-      ...data,
-      produtos: JSON.stringify([...produtos]),
-    }
-    const response = await db('pedidos').insert(novoFormatoBanco);
-    return response;
+  criaPedido = async (data, listaProdutos) => {
+    console.log(listaProdutos);
+
+    listaProdutos.forEach(({id, quantidade}) => verificaQuantidadeProduto(id, quantidade));
+
+    listaProdutos.forEach(({id, quantidade}) => atualizaQuantidadeProduto(id, quantidade));
+
+    return criaPedidoBanco(data, listaProdutos);
   };
 
   atualizaPedido = async (id, data) => {
