@@ -40,6 +40,7 @@ Com todo o banco criado e populado, podemos iniciar a aplicação com o comando:
 <code>$ npm start</code>
 
 <hr>
+
 # <a name="#initEmail"></a> Configuração Email
 
 Nessa API, temos uma funcionalidade para o endpoint <code>criaPedido</code> que ao final do pedido, é enviado um email para o cliente, confirmando a compra, em features próximas iremos disponibilizar para mais servidores, mas no momento, precisamos ter um email **gmail** para testar.
@@ -56,6 +57,7 @@ Siga os passos para configuração:
 Essa senha é uma senha que o próprio gmail disponibiliza para ser usado em aplicativos, você pode conseguir seguindo esses passos [aqui](https://support.google.com/accounts/answer/185833?hl=pt-BR).
 
 <hr>
+
 # <a name="initApi"></a> Acessando a API
 
 Para acessar a API, basta acessar o endereco <code><http://localhost:4000/></code>
@@ -63,6 +65,7 @@ Para acessar a API, basta acessar o endereco <code><http://localhost:4000/></cod
 Você ira ver uma página chamada Playground, uma IDE gráfica do GraphQL, feita para testarmos requisições, para mais informações clique [aqui](https://www.apollographql.com/docs/apollo-server/v2/testing/graphql-playground/).
 
 <hr>
+
 # <a name="crudClient"></a> CRUD Clientes
 
 ## Criando Clientes
