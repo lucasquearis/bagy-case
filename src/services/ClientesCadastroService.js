@@ -11,7 +11,7 @@ class ClientesCadastroService {
   }
 
   atualizaCliente = async (id, data) => {
-    const [response] = await db('clientes').where({ id }).update(data);
+    const response = await db('clientes').where({ id }).update(data);
     return response;
   }
 

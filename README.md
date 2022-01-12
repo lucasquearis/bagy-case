@@ -41,7 +41,7 @@ Com todo o banco criado e populado, podemos iniciar a aplicação com o comando:
 
 <hr>
 
-# <a name="#initEmail"></a> Configuração Email
+# <a name="initEmail"></a> Configuração Email
 
 Nessa API, temos uma funcionalidade para o endpoint <code>criaPedido</code> que ao final do pedido, é enviado um email para o cliente, confirmando a compra, em features próximas iremos disponibilizar para mais servidores, mas no momento, precisamos ter um email **gmail** para testar.
 
@@ -70,11 +70,37 @@ Você ira ver uma página chamada Playground, uma IDE gráfica do GraphQL, feita
 
 ## Criando Clientes
 
-Nesse endpoint a função <code>criaCliente</code> recebe um objeto <code>data</code> com o seguinte formato:
+Nesse mutation a função <code>criaCliente</code> recebe um objeto <code>data</code> com o seguinte formato:
 
-- nomeCompleto: <code>String obrigatório</code>
-- email: <code>String obrigatório</code>
+- nomeCompleto: <code>String obrigatório ÚNICO</code>
+- email: <code>String obrigatório ÚNICO</code>
 - cpf: <code>String obrigatório</code>
 - dataNascimento: <code>String obrigatório</code>
 
-![cria client](/imagens/createClient.png)
+![cria cliente](/imagens/createClientExample.png)
+
+## Listando Clientes
+
+Nessa query a função <code>clientes</code> não recebe nenhum input e lista todos os clientes.
+
+![lista clientes](/imagens/clientesExample.png)
+
+Nessa query a função <code>cliente</code> recebe um id com o formato <code>ID</code> e lista o cliente respectivo.
+
+![cliente](/imagens/clienteExample.png)
+
+## Atualizando Clientes
+
+Nessa mutation a função <code>atualizaCliente</code> recebe dois inputs <code>id</code> e <code>data</code> onde data é um objeto que contem a propriedade que deseja alterar, podendo ser ao menos uma, ou todas.
+
+![atualiza cliente](/imagens/atualizaClientExample.png)
+
+## Deletando Clientes
+
+Nessa mutation a função <code>deletaCliente</code> precisa receber um objeto <code>filtro</code> onde precisa ter como chave ao menos **uma** das opções:
+
+- id: <code>ID</code>
+- email: <code>String</code>
+- cpf: <code>String</code>
+
+![deleta cliente](/imagens/deletaClienteExample.png)
