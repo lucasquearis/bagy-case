@@ -7,7 +7,7 @@ exports.up = function(knex) {
     if (res) {
       return knex.schema.createTable('enderecos', table => {
         table.increments('id').primary();
-        table.integer('enderecoClienteId').unsigned().notNullable();
+        table.integer('enderecoClienteId').unsigned().notNullable().unique();
         table.foreign('enderecoClienteId').references('clientes.id');
         table.text('rua').notNullable();
         table.text('bairro').notNullable();

@@ -1,0 +1,36 @@
+type Endereco {
+  id: ID,
+  enderecoClienteId: ID,
+  rua: String,
+  bairro: String,
+  cidade: String,
+  estado: String,
+  pais: String,
+  cep: String,
+  numero: String,
+}
+
+input EnderecoInput {
+  enderecoClienteId: ID,
+  rua: String,
+  bairro: String,
+  cidade: String,
+  estado: String,
+  pais: String,
+  cep: String,
+  numero: String,
+}
+
+type Query {
+  endereco(id: ID!): Endereco,
+
+  enderecos: [Endereco],
+}
+
+type Mutation {
+  criaEndereco(data: EnderecoInput): Endereco!,
+
+  atualizaEndereco(id: ID!, data: EnderecoInput): Endereco!,
+
+  deletaEndereco(id: ID!): Boolean,
+}

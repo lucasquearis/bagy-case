@@ -1,11 +1,11 @@
 const clientesService = require('../../../services/ClientesCadastroService');
-const db = require('../../../db');
 
 module.exports = {
   Query: {
     cliente: async (_, { id }) => clientesService.cliente(id),
     clientes: async () => clientesService.clientes(),
   },
+  
   Mutation: {
     criaCliente: async (_, { data }) => clientesService.criaCliente(data),
 
