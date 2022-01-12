@@ -2,7 +2,7 @@ const pedidoService = require('../../../services/PedidosCadastroService');
 
 module.exports = {
   Query: {
-    pedido: async(_, { id }) => pedidoService.pedido(id),
+    pedido: async (_, { id }) => pedidoService.pedido(id),
     pedidos: async () => pedidoService.pedidos(),
   },
 

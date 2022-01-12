@@ -11,6 +11,6 @@ module.exports = {
 
     atualizaCliente: async (_, { id, data }) => clientesService.atualizaCliente(id, data),
 
-    deletaCliente: async(_, { filtro }) => clientesService.deletaCliente(filtro),
-  }
+    deletaCliente: async (_, { filtro }) => clientesService.deletaCliente(filtro),
+  },
 };

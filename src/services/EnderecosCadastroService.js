@@ -1,9 +1,9 @@
 const db = require('../db');
 
 class EnderecosCadastroService {
-  endereco = async (id) => await db('enderecos').where({ id }).first();
+  endereco = async (id) => db('enderecos').where({ id }).first();
 
-  enderecos = async () => await db('enderecos');
+  enderecos = async () => db('enderecos');
 
   criaEndereco = async (data) => {
     const [response] = await db('enderecos').insert(data);
@@ -16,6 +16,6 @@ class EnderecosCadastroService {
   }
 
   deletaEndereco = async (id) => db('enderecos').where({ id }).delete();
-};
+}
 
 module.exports = new EnderecosCadastroService();

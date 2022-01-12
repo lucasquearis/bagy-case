@@ -1,9 +1,9 @@
 const db = require('../db');
 
 class ProdutosCadastroService {
-  produto = async (id) => await db('produtos').where({ id }).first();
+  produto = async (id) => db('produtos').where({ id }).first();
 
-  produtos = async () => await db('produtos');
+  produtos = async () => db('produtos');
 
   criaProduto = async (data) => {
     const [response] = await db('produtos').insert(data);
@@ -16,6 +16,6 @@ class ProdutosCadastroService {
   }
 
   deletaProduto = async (id) => db('produtos').where({ id }).delete();
-};
+}
 
 module.exports = new ProdutosCadastroService();

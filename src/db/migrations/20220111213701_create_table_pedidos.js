@@ -1,6 +1,4 @@
-
-exports.up = function(knex) {
-  return knex.schema.createTable('pedidos', table => {
+exports.up = (knex) => knex.schema.createTable('pedidos', (table) => {
     table.increments('id').primary();
     table.text('produtos').notNullable();
     table.text('dataVenda').notNullable();
@@ -8,9 +6,6 @@ exports.up = function(knex) {
     table.integer('clienteId').unsigned().notNullable();
     table.foreign('clienteId').references('clientes.id');
     table.text('status').notNullable();
-  })
-};
+  });
 
-exports.down = function(knex) {
-  return knex.schema.dropTable('pedidos');
-};
+exports.down = (knex) => knex.schema.dropTable('pedidos');

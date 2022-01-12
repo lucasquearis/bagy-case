@@ -1,13 +1,12 @@
 const db = require('../db');
 
 class ClientesCadastroService {
+  cliente = async (id) => db('clientes').where({ id }).first();
 
-  cliente = async (id) => await db('clientes').where({ id }).first();
-
-  clientes = async () => await db('clientes');
+  clientes = async () => db('clientes');
 
   criaCliente = async (data) => {
-    const [response] = await db("clientes").insert(data);
+    const [response] = await db('clientes').insert(data);
     return response;
   }
 
@@ -16,17 +15,17 @@ class ClientesCadastroService {
     return response;
   }
 
-  deletaCliente = async({ id, cpf, email }) => {
+  deletaCliente = async ({ id, cpf, email }) => {
     if (id) {
-      return await db("clientes").where({id}).delete();
+      return db('clientes').where({ id }).delete();
     }
     if (cpf) {
-      return await db("clientes").where({cpf}).delete();
+      return db('clientes').where({ cpf }).delete();
     }
     if (email) {
-      return await db("clientes").where({email}).delete();
+      return db('clientes').where({ email }).delete();
     }
-    throw new Error('Favor passar um parametro sendo eles, id, cpf ou email!')
+    throw new Error('Favor passar um parametro sendo eles, id, cpf ou email!');
   }
 }
 
