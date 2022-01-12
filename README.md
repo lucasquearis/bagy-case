@@ -109,8 +109,41 @@ Nessa mutation a função <code>deletaCliente</code> precisa receber um objeto <
 
 ![deleta cliente](/imagens/deletaClienteExample.png)
 
-# <a name="crudEnderecos"></a> CRUD Endereços
+# <a name="crudEndereco"></a> CRUD Endereços
 
 ## Criando Endereços
 
-Nessa mutation a função <code>criaEndereco</code>
+Nessa mutation a função <code>criaEndereco</code> precisa receber um objeto <code>data</code> onde precisa ter as seguintes chaves:
+
+- enderecoClienteId: <code>ID obrigatório ÚNICO</code>
+- rua: <code>String obrigatório</code>
+- bairro: <code>String obrigatório</code>
+- cidade: <code>String obrigatório</code>
+- estado: <code>String obrigatório</code>
+- pais: <code>String obrigatório</code>
+- cep: <code>String obrigatório</code>
+- numero: <code>Int obrigatório</code>
+
+![cria endereço](/imagens/criaEnderecoExample.png)
+
+## Listando Endereços
+
+Nessa query a função <code>enderecos</code> não recebe nenhum input e lista todos os enderecos.
+
+![lista enderecos](/imagens/enderecosExample.png)
+
+Nessa query a função <code>endereco</code> recebe um id com o formato <code>ID</code> e lista o endereco respectivo.
+
+![endereco](/imagens/enderecoExample.png)
+
+## Atualizando Endereços
+
+Nessa mutation a função <code>atualizaEnderecoe</code> recebe dois inputs <code>id</code> e <code>data</code> onde data é um objeto que contem a propriedade que deseja alterar, podendo ser ao menos uma, ou todas.
+
+![atualiza cliente](/imagens/atualizaEnderecoExample.png)
+
+## Deletando Endereços
+
+Nessa mutation a função <code>deletaEndereco</code> precisa receber um <code>id</code> que deleta o respectivo endereço.
+
+![deleta Endereco](/imagens/deletaEnderecoExample.png)

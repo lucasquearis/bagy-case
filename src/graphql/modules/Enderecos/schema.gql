@@ -7,7 +7,7 @@ type Endereco {
   estado: String,
   pais: String,
   cep: String,
-  numero: String,
+  numero: Int,
 }
 
 input EnderecoInput {
@@ -18,7 +18,7 @@ input EnderecoInput {
   estado: String,
   pais: String,
   cep: String,
-  numero: String,
+  numero: Int,
 }
 
 type Query {
