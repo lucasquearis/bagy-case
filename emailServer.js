@@ -2,27 +2,26 @@
 
 const nodemailer = require('nodemailer');
 
-require('dotenv').config()
-  
-  
+require('dotenv').config();
+
+const mailTransporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.PASSWORD_EMAIL,
+    },
+});
+
 const enviaEmail = (email, text) => {
-    let mailTransporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.PASSWORD_EMAIL,
-        }
-    });
-      
-    let mailDetails = {
+    const mailDetails = {
         from: process.env.EMAIL_USER,
         to: email,
         subject: 'Compra Realizada Com Sucesso',
         text,
     };
       
-    mailTransporter.sendMail(mailDetails, function(err, data) {
-        if(err) {
+    mailTransporter.sendMail(mailDetails, (err) => {
+        if (err) {
             console.log('Ocorreu algum erro e seu email, não foi enviado');
         } else {
             console.log('Email enviado com sucesso');

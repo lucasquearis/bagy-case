@@ -4,9 +4,12 @@ Nesse desafio tive que criar uma API GraphQL Node utilizando a linguagem JavaScr
 
 ## Sumário
 
-- [Iniciando a Aplicação](#initapp)
+- [Iniciando a Aplicação](#initApp)
+- [Configuração Email](#initEmail)
+- [Acessando a API](#initApi)
+- [CRUD Clientes](#crudClient)
 
-# <a name="initapp"></a> Iniciando a Aplicação
+# <a name="initApp"></a> Iniciando a Aplicação
 
 Para iniciar a aplicação primeiramente clone este repositório com o seguinte comando:
 
@@ -31,3 +34,44 @@ Após criado todas nossas 4 tabelas, precisaremos "popular" essa tabela com algu
 Perceba que com esse comando foram populados 3 tabelas no nosso banco <code>bagy.db</code>, sendo elas <code>clientes enderecos produtos</code>.
 
 ![confirmação seeds](/imagens/seedConfirm.png)
+
+Com todo o banco criado e populado, podemos iniciar a aplicação com o comando:
+
+<code>$ npm start</code>
+
+<hr>
+# <a name="#initEmail"></a> Configuração Email
+
+Nessa API, temos uma funcionalidade para o endpoint <code>criaPedido</code> que ao final do pedido, é enviado um email para o cliente, confirmando a compra, em features próximas iremos disponibilizar para mais servidores, mas no momento, precisamos ter um email **gmail** para testar.
+
+Siga os passos para configuração:
+
+- Crie um arquivo de variavel de ambiente chamado <code>.env</code> na pasta principal do projeto, se preferir adicionar as variaveis locais manualmente fique a vontade.
+
+- Adicione as seguintes variaveis nesse arquivo <code>EMAIL_USER</code> e <code>PASSWORD_EMAIL</code> como no exemplo a seguir:
+![Arquivo .env exemplo](/imagens/dotEnvExample.png)
+
+**Essa senha não é a senha que você utiliza para entrar no email**
+
+Essa senha é uma senha que o próprio gmail disponibiliza para ser usado em aplicativos, você pode conseguir seguindo esses passos [aqui](https://support.google.com/accounts/answer/185833?hl=pt-BR).
+
+<hr>
+# <a name="initApi"></a> Acessando a API
+
+Para acessar a API, basta acessar o endereco <code><http://localhost:4000/></code>
+
+Você ira ver uma página chamada Playground, uma IDE gráfica do GraphQL, feita para testarmos requisições, para mais informações clique [aqui](https://www.apollographql.com/docs/apollo-server/v2/testing/graphql-playground/).
+
+<hr>
+# <a name="crudClient"></a> CRUD Clientes
+
+## Criando Clientes
+
+Nesse endpoint a função <code>criaCliente</code> recebe um objeto <code>data</code> com o seguinte formato:
+
+- nomeCompleto: <code>String obrigatório</code>
+- email: <code>String obrigatório</code>
+- cpf: <code>String obrigatório</code>
+- dataNascimento: <code>String obrigatório</code>
+
+![cria client](/imagens/createClient.png)
