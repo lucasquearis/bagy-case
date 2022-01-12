@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -e js,gql",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon -e js,gql",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",

@@ -6,8 +6,8 @@ exports.up = function(knex) {
     table.text('imagem').notNullable();
     table.text('descricao').notNullable();
     table.text('peso').notNullable();
-    table.text('preco').notNullable();
-    table.text('quantidadeEstoque').notNullable();
+    table.double('preco').notNullable();
+    table.integer('quantidadeEstoque').notNullable();
   })
 };
 

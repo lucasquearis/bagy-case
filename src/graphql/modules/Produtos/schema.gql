@@ -2,13 +2,30 @@ type Produto {
   id: ID,
   nome: String,
   imagem: String,
-  description: String,
+  descricao: String,
   peso: String,
-  preco: String,
-  quantidade: Int,
+  preco: Float,
+  quantidadeEstoque: Int,
+}
+
+input ProdutoInput {
+  nome: String,
+  imagem: String,
+  descricao: String,
+  peso: String,
+  preco: Float,
+  quantidadeEstoque: Int,
 }
 
 type Query {
-  produto(id: ID): Produto,
+  produto(id: ID!): Produto,
   produtos: [Produto]
+}
+
+type Mutation {
+  criaProduto(data: ProdutoInput): Produto!,
+
+  atualizaProduto(id: ID!, data: ProdutoInput): Produto!,
+
+  deletaProduto(id: ID!): Boolean,
 }

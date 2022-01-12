@@ -11,4 +11,4 @@ const server = new ApolloServer({
   }
 });
 
-server.listen().then(({ url }) => console.log(url));
+server.listen().then(({ url }) => console.log(`APP ONLINE NESSE LINK: ${url}`));
