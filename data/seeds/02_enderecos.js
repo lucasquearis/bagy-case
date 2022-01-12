@@ -44,6 +44,16 @@ exports.seed = function(knex) {
           cep: '82710-320',
           numero: 23
         },
+        {
+          enderecoClienteId: 5,
+          rua: 'Rua Ilhas Galápagos',
+          bairro: 'Ponta Negra',
+          cidade: 'Manaus',
+          estado: 'AM',
+          pais: 'Brasil',
+          cep: '69037-114',
+          numero: 75
+        },
       ]);
     });
 };
