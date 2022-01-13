@@ -21,7 +21,11 @@ Para iniciar a aplicação primeiramente clone este repositório com o seguinte 
 
 <code>$ git clone git@github.com:lucasquearis/bagy-case.git </code>
 
-Apos clonado o repositório, entre em sua pasta principal e instale todas as dependências com o comando:
+Apos clonado o repositório, entre em sua pasta principal com o comando:
+
+<code>$ cd bagy-case</code>
+
+ e instale todas as dependências com o comando:
 
 <code>$ npm install </code>
 
