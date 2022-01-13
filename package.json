@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "nodemon -e js,gql",
     "start": "node index.js",
+    "test": "jest",
+    "coverage": "npm test -- --coverage --watchAll=false",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx",
     "createDatabases": "knex migrate:latest",
     "populateDatabases": "knex seed:run"
   },
@@ -16,6 +19,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-trybe-backend": "^1.0.4",
+    "jest": "^27.4.7",
     "nodemon": "^2.0.2"
   },
   "dependencies": {
