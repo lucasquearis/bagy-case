@@ -233,7 +233,7 @@ Nessa mutation a função <code>deletaPedido</code> precisa receber um <code>id<
 
 ![deleta pedido](/imagens/deletaPedidoExample.png);
 
-# <a name="initApp"></a> Ferramentas Utilizadas
+# <a name="frameworks"></a> Ferramentas Utilizadas
 
 - Eslint para padronização do código
 - Nodemon para desenvolvimento
