@@ -33,8 +33,7 @@ class ClientesCadastroService {
   atualizaCliente = async (id, data) => {
     validaCliente(data);
     const response = await db('clientes').where({ id }).update(data);
-    
-    return response;
+    if (response) return this.cliente(id);
   }
 
   deletaCliente = async ({ id, cpf, email }) => {
