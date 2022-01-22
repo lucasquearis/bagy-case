@@ -26,13 +26,14 @@ class ClientesCadastroService {
 
   criaCliente = async (data) => {
     validaCliente(data);
-    const [response] = await db('clientes').insert(data);
-    return response;
+    const [clienteId] = await db('clientes').insert(data);
+    return this.cliente(clienteId);
   }
 
   atualizaCliente = async (id, data) => {
     validaCliente(data);
     const response = await db('clientes').where({ id }).update(data);
+    
     return response;
   }
 
