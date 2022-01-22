@@ -17,14 +17,13 @@ class ProdutosCadastroService {
 
   criaProduto = async (data) => {
     validaProduto(data);
-    const [response] = await db('produtos').insert(data);
-    return response;
+    const [produtoId] = await db('produtos').insert(data);
+    return this.produto(produtoId);
   }
 
   atualizaProduto = async (id, data) => {
-    // validaProduto(data);
     const response = await db('produtos').where({ id }).update(data);
-    return response;
+    if (response) return this.produto(id);
   }
 
   deletaProduto = async (id) => db('produtos').where({ id }).delete();
