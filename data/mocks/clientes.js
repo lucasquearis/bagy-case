@@ -24,7 +24,7 @@ const clientes = [
     dataNascimento: '02/01/2003',
   },
   {
-    nomeCompleto: 'Augusto Lucca Rafael da Costa',
+    nomeCompleto: 'Augusto Lucca Costa',
     email: 'augustoluccarafaeldacosta_@nhrtaxiaereo.com',
     cpf: '25303918904',
     dataNascimento: '10/01/2003',

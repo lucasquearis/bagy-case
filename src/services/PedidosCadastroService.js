@@ -1,7 +1,26 @@
 const db = require('../db');
 const { enviaEmail } = require('../../emailServer');
+const { validaData } = require('./helpers/validaData');
+const { validaParcelas } = require('./helpers/validaParcelas');
+const { validaStatus, statusDisponiveis } = require('./helpers/validaStatus');
 
 const produtosEmailInfo = [];
+
+const validaPedido = (data, listaProdutos = []) => {
+  switch (false) {
+    case validaData(data.dataVenda):
+      throw new Error('Insira uma data válida no formato DD/MM/YYYY');
+    case validaParcelas(data.parcelas):
+      throw new Error('Insira um número de parcela maior que 0 e menor que 12');
+    case validaStatus(data.status):
+      throw new Error(`Status inválido, por favor insira algum desses: ${statusDisponiveis}`);
+    default:
+      break;
+  }
+  listaProdutos.forEach(({ quantidade }) => {
+    if (quantidade < 1) throw new Error('Por favor insira um produto com quantidade maior que 0');
+  });
+};
 
 const verificaQuantidadeProduto = async (id, quantidade) => {
   const response = await db('produtos').where({ id }).first();
@@ -45,14 +64,17 @@ class PedidosCadastroService {
   pedidos = async () => db('pedidos');
 
   criaPedido = async (data, listaProdutos) => {
-    listaProdutos.forEach(({ id, quantidade }) => verificaQuantidadeProduto(id, quantidade));
-
-    listaProdutos.forEach(({ id, quantidade }) => atualizaQuantidadeProduto(id, quantidade));
+    validaPedido(data, listaProdutos);
+    listaProdutos.forEach(({ id, quantidade }) => {
+      verificaQuantidadeProduto(id, quantidade);
+      atualizaQuantidadeProduto(id, quantidade);
+    });
 
     return criaPedidoBanco(data, listaProdutos);
   };
 
   atualizaPedido = async (id, data) => {
+    validaPedido(data);
     const response = await db('pedidos').where({ id }).update(data);
     return response;
   }
