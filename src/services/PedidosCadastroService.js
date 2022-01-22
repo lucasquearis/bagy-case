@@ -3,6 +3,7 @@ const { enviaEmail } = require('../../emailServer');
 const { validaData } = require('./helpers/validaData');
 const { validaParcelas } = require('./helpers/validaParcelas');
 const { validaStatus, statusDisponiveis } = require('./helpers/validaStatus');
+const { cliente } = require('./ClientesCadastroService');
 
 const produtosEmailInfo = [];
 
@@ -25,10 +26,10 @@ const validaPedido = (data, listaProdutos = []) => {
 const verificaQuantidadeProduto = async (id, quantidade) => {
   const response = await db('produtos').where({ id }).first();
   const infoProduto = { produto: response.nome, quantidade, preco: (quantidade * response.preco) };
-  produtosEmailInfo.push(infoProduto);
   if (quantidade > response.quantidadeEstoque) {
     throw new Error('Número de produtos indisponíveis');
   }
+  produtosEmailInfo.push(infoProduto);
   return true;
 };
 
@@ -47,7 +48,7 @@ const criaPedidoBanco = async (data, listaProdutos) => {
     produtos: JSON.stringify(listaProdutos),
   };
 
-  const [response] = await db('pedidos').insert(formatoBanco);
+  const [pedidoId] = await db('pedidos').insert(formatoBanco);
   const { email } = await db('clientes').where({ id: clienteId }).first();
   enviaEmail(email, produtosEmailInfo
     .map(({ produto,
@@ -55,7 +56,12 @@ const criaPedidoBanco = async (data, listaProdutos) => {
             preco, 
       }) => `Produto: ${produto} - Quantidade: ${quantidade} - Preço Total: ${preco}`)
     .join('\n'));
-  return response;
+  return pedidoId;
+};
+
+const validaCliente = async (clienteId) => {
+  const response = await cliente(clienteId);
+  if (!response) throw new Error('clienteId inválido');
 };
 
 class PedidosCadastroService {
@@ -64,19 +70,25 @@ class PedidosCadastroService {
   pedidos = async () => db('pedidos');
 
   criaPedido = async (data, listaProdutos) => {
+    await validaCliente(data.clienteId);
+    if (!listaProdutos[0].id || !listaProdutos[0].quantidade) {
+      throw new
+      Error('A propriedade produtos, deve ser uma array de objetos com id e quantidade');
+    }
     validaPedido(data, listaProdutos);
-    listaProdutos.forEach(({ id, quantidade }) => {
-      verificaQuantidadeProduto(id, quantidade);
-      atualizaQuantidadeProduto(id, quantidade);
-    });
-
-    return criaPedidoBanco(data, listaProdutos);
+    await Promise.all(listaProdutos.map(async ({ id, quantidade }) => {
+      await verificaQuantidadeProduto(id, quantidade);
+      await atualizaQuantidadeProduto(id, quantidade);
+    }));
+    const responseId = await criaPedidoBanco(data, listaProdutos);
+    return this.pedido(responseId);
   };
 
   atualizaPedido = async (id, data) => {
+    await validaCliente(data.clienteId);
     validaPedido(data);
     const response = await db('pedidos').where({ id }).update(data);
-    return response;
+    if (response) return this.pedido(id);
   }
 
   deletaPedido = async (id) => db('pedidos').where({ id }).delete();
