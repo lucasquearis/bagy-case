@@ -6,13 +6,15 @@ class EnderecosCadastroService {
   enderecos = async () => db('enderecos');
 
   criaEndereco = async (data) => {
-    const [response] = await db('enderecos').insert(data);
+    console.log(data);
+    const [enderecoId] = await db('enderecos').insert(data);
+    const response = this.endereco(enderecoId);
     return response;
   }
 
   atualizaEndereco = async (id, data) => {
-    const [response] = await db('enderecos').where({ id }).update(data);
-    return response;
+    const response = await db('enderecos').where({ id }).update(data);
+    if (response) return this.endereco(id);
   }
 
   deletaEndereco = async (id) => db('enderecos').where({ id }).delete();
