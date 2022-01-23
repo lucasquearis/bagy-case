@@ -33,4 +33,14 @@ describe('Testa endpoint clientes', () => {
           done();
       })
   })
+  // it('Testa endpoint que cria um cliente', (done) => {
+  //   request.post('/')
+  //     .send({ mutation: '{criaCliente(data: {nomeCompleto: "Teste", email: "teste@email.com", cpf: "11111111111", dataNascimento: "12/12/1994"}) {id nomeCompleto email cpf dataNascimento}}' })
+  //     .expect(200)
+  //     .end((err, res) => {
+  //       if (err) return done(err);
+  //         console.log(res)
+  //         done();
+  //     })
+  // })
 });
